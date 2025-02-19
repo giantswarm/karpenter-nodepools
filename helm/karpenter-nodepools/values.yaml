@@ -1,0 +1,6 @@
+name: karpenter-nodepools
+serviceType: managed
+
+project:
+  branch: "[[ .Branch ]]"
+  commit: "[[ .SHA ]]"
