@@ -9,9 +9,9 @@ nodePools:
       cpu: "1000"
       memory: "1000Gi"
 
-    rootVolumeSizeGB: 8Gi
-    libVolumeSizeGB: 120Gi
-    logVolumeSizeGB: 30Gi
+    rootVolumeSizeGB: 8
+    libVolumeSizeGB: 120
+    logVolumeSizeGB: 30
 
     requirements:
       - key: karpenter.k8s.aws/instance-family

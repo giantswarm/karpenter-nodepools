@@ -33,19 +33,19 @@ spec:
     - deviceName: /dev/xvda
       rootVolume: true
       ebs:
-        volumeSize: {{ $value.rootVolumeSizeGB }}
+        volumeSize: {{ $value.rootVolumeSizeGB }}Gi
         volumeType: gp3
         deleteOnTermination: true
     - deviceName: /dev/xvdd
       ebs:
         encrypted: true
-        volumeSize: {{ $value.libVolumeSizeGB }}
+        volumeSize: {{ $value.libVolumeSizeGB }}Gi
         volumeType: gp3
         deleteOnTermination: true
     - deviceName: /dev/xvde
       ebs:
         encrypted: true
-        volumeSize: {{ $value.logVolumeSizeGB }}
+        volumeSize: {{ $value.logVolumeSizeGB }}Gi
         volumeType: gp3
         deleteOnTermination: true
 
