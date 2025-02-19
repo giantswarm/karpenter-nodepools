@@ -20,7 +20,7 @@ spec:
         sigs.k8s.io/cluster-api-provider-aws/role: node
         sigs.k8s.io/cluster-api-provider-aws/cluster/{{ $.Values.clusterName }}: "owned"
 
-  instanceProfile: "nodes-{{ $.Values.clusterName }}-{{ $name }}"
+  instanceProfile: "nodes-{{ $name }}-{{ $.Values.clusterName }}"
 
   metadataOptions:
     httpEndpoint: enabled
