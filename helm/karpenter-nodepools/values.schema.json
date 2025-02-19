@@ -2,22 +2,64 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
-        "name": {
+        "clusterName": {
             "type": "string"
         },
-        "project": {
+        "clusterRegion": {
+            "type": "string"
+        },
+        "nodePools": {
             "type": "object",
             "properties": {
-                "branch": {
-                    "type": "string"
-                },
-                "commit": {
-                    "type": "string"
+                "def00": {
+                    "type": "object",
+                    "properties": {
+                        "amiId": {
+                            "type": "string"
+                        },
+                        "libVolumeSizeGB": {
+                            "type": "string"
+                        },
+                        "limits": {
+                            "type": "object",
+                            "properties": {
+                                "cpu": {
+                                    "type": "string"
+                                },
+                                "memory": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "logVolumeSizeGB": {
+                            "type": "string"
+                        },
+                        "requirements": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "type": "string"
+                                    },
+                                    "operator": {
+                                        "type": "string"
+                                    },
+                                    "values": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "rootVolumeSizeGB": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
-        },
-        "serviceType": {
-            "type": "string"
         }
     }
 }

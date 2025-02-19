@@ -1,0 +1,54 @@
+{{- range $name, $value := .Values.nodePools }}
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  labels:
+    {{- include "labels.common" $ | nindent 4 }}
+  name: {{ $.Values.clusterName }}-{{ $name }}
+spec:
+  # Template section that describes how to template out NodeClaim resources that Karpenter will provision
+  # Karpenter will consider this template to be the minimum requirements needed to provision a Node using this NodePool
+  # It will overlay this NodePool with Pods that need to schedule to further constrain the NodeClaims
+  # Karpenter will provision to launch new Nodes for the cluster
+  template:
+    metadata:
+      # Labels are arbitrary key-values that are applied to all nodes
+      labels:
+        giantswarm.io/machine-pool: {{ $.Values.clusterName }}-{{ $name }}
+    spec:
+      # Provisioned nodes will have these taints, but pods do not need to tolerate these taints to be provisioned by this
+      # NodePool. These taints are expected to be temporary and some other entity (e.g. a DaemonSet) is responsible for
+      # removing the taint after it has finished initializing the node.
+      startupTaints:
+        - effect: NoExecute
+          key: node.cilium.io/agent-not-ready
+          value: "true"
+        - effect: NoExecute
+          key: node.cluster.x-k8s.io/uninitialized
+          value: "true"
+      # References the Cloud Provider's NodeClass resource, see your cloud provider specific documentation
+      nodeClassRef:
+        group: karpenter.k8s.aws  # Updated since only a single version will be served
+        kind: EC2NodeClass
+        name: {{ $.Values.clusterName }}-{{ $name }}
+
+      # Requirements that constrain the parameters of provisioned nodes.
+      # These requirements are combined with pod.spec.topologySpreadConstraints, pod.spec.affinity.nodeAffinity, pod.spec.affinity.podAffinity, and pod.spec.nodeSelector rules.
+      # Operators { In, NotIn, Exists, DoesNotExist, Gt, and Lt } are supported.
+      # https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#operators
+      requirements:
+        {{- range $value.requirements }}
+        - key: {{ .key }}
+          operator: {{ .operator }}
+          values:
+            {{- range .values }}
+            - "{{ . }}"
+            {{- end }}
+        {{- end }}
+
+  # Resource limits constrain the total size of the pool.
+  # Limits prevent Karpenter from creating new instances once the limit is exceeded.
+  limits:
+    cpu: {{ $value.limits.cpu }}
+    memory: {{ $value.limits.memory }}
+{{- end }}
