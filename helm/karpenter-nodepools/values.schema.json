@@ -18,7 +18,7 @@
                             "type": "string"
                         },
                         "libVolumeSizeGB": {
-                            "type": "string"
+                            "type": "integer"
                         },
                         "limits": {
                             "type": "object",
@@ -32,7 +32,7 @@
                             }
                         },
                         "logVolumeSizeGB": {
-                            "type": "string"
+                            "type": "integer"
                         },
                         "requirements": {
                             "type": "array",
@@ -55,7 +55,7 @@
                             }
                         },
                         "rootVolumeSizeGB": {
-                            "type": "string"
+                            "type": "integer"
                         }
                     }
                 }
