@@ -3,7 +3,7 @@
     "type": "object",
     "properties": {
         "amiOwner": {
-            "type": "string"
+            "type": "integer"
         },
         "baseOS": {
             "type": "string"

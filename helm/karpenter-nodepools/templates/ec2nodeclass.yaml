@@ -12,7 +12,7 @@ spec:
     - id: {{ $value.amiId }}
     {{- else }}
     - name: flatcar-stable-{{ $.Values.baseOS }}-kube-{{ $.Values.k8sVersion }}-tooling-{{ $.Values.toolingVersion }}-gs
-      owner: {{ $.Values.amiOwner }}
+      owner: {{ int64 $.Values.amiOwner | quote }}
     {{- end }}
   subnetSelectorTerms:
     - tags:
