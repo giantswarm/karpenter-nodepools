@@ -23,9 +23,6 @@
                 "def00": {
                     "type": "object",
                     "properties": {
-                        "amiId": {
-                            "type": "string"
-                        },
                         "libVolumeSizeGB": {
                             "type": "integer"
                         },

@@ -7,8 +7,6 @@ toolingVersion: 1.20.0
 
 nodePools:
   def00:
-    amiId: ami-049df03492bb2926b
-
     limits:
       cpu: "1000"
       memory: "1000Gi"
