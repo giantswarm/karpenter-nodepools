@@ -8,8 +8,12 @@ metadata:
 spec:
   amiFamily: Custom
   amiSelectorTerms:
+    {{- if $value.amiId }}
     - id: {{ $value.amiId }}
-    
+    {{- else }}
+    - name: flatcar-stable-{{ $.Values.baseOS }}-kube-{{ $.Values.k8sVersion }}-tooling-{{ $.Values.toolingVersion }}-gs
+      owner: {{ $.Values.amiOwner }}
+    {{- end }}
   subnetSelectorTerms:
     - tags:
         sigs.k8s.io/cluster-api-provider-aws/cluster/{{ $.Values.clusterName }}: "owned"

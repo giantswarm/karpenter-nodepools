@@ -2,10 +2,19 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+        "amiOwner": {
+            "type": "integer"
+        },
+        "baseOS": {
+            "type": "string"
+        },
         "clusterName": {
             "type": "string"
         },
         "clusterRegion": {
+            "type": "string"
+        },
+        "k8sVersion": {
             "type": "string"
         },
         "nodePools": {
@@ -60,6 +69,9 @@
                     }
                 }
             }
+        },
+        "toolingVersion": {
+            "type": "string"
         }
     }
 }
