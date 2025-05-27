@@ -15,6 +15,14 @@ spec:
       # Labels are arbitrary key-values that are applied to all nodes
       labels:
         giantswarm.io/machine-pool: {{ $.Values.clusterName }}-{{ $name }}
+        {{- with $value.customNodeLabels }}
+        {{- range . }}
+        {{- $parts := splitList "=" . }}
+        {{- if eq (len $parts) 2 }}
+        {{ index $parts 0 }}: {{ index $parts 1 | quote }}
+        {{- end }}
+        {{- end }}
+        {{- end }}
     spec:
       # Provisioned nodes will have these taints, but pods do not need to tolerate these taints to be provisioned by this
       # NodePool. These taints are expected to be temporary and some other entity (e.g. a DaemonSet) is responsible for

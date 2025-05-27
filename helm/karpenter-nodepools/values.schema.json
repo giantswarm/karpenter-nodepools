@@ -33,6 +33,14 @@
                 "def00": {
                     "type": "object",
                     "properties": {
+                        "customNodeLabels": {
+                            "type": "array",
+                            "title": "Custom node labels",
+                            "items": {
+                                "type": "string",
+                                "title": "Label"
+                            }
+                        },
                         "libVolumeSizeGB": {
                             "type": "integer"
                         },
