@@ -14,15 +14,33 @@ spec:
     - name: flatcar-stable-{{ $.Values.baseOS }}-kube-{{ $.Values.k8sVersion }}-tooling-{{ $.Values.toolingVersion }}-gs
       owner: {{ int64 $.Values.amiOwner | quote }}
     {{- end }}
+  # Required, discovers subnets to attach to instances
+  # Each term in the array of subnetSelectorTerms is ORed together
+  # Within a single term, all conditions are ANDed
   subnetSelectorTerms:
     - tags:
         sigs.k8s.io/cluster-api-provider-aws/cluster/{{ $.Values.clusterName }}: "owned"
-        sigs.k8s.io/cluster-api-provider-aws/role: private
+        sigs.k8s.io/cluster-api-provider-aws/role: {{ $.Values.vpcMode }}
+        {{- if $value.subnetTags }}
+        {{- range $value.subnetTags }}
+        {{- range $key, $val := . }}
+        {{ $key }}: {{ $val | quote }}
+        {{- end }}
+        {{- end }}
+        {{- end }}
 
+  # Required, discovers security groups to attach to instances
+  # Each term in the array of securityGroupSelectorTerms is ORed together
+  # Within a single term, all conditions are ANDed
   securityGroupSelectorTerms:
     - tags:
-        sigs.k8s.io/cluster-api-provider-aws/role: node
         sigs.k8s.io/cluster-api-provider-aws/cluster/{{ $.Values.clusterName }}: "owned"
+        sigs.k8s.io/cluster-api-provider-aws/role: node
+    {{- if $value.additionalSecurityGroups }}
+    {{- range $value.additionalSecurityGroups }}
+    - id: {{ .id }}
+    {{- end }}
+    {{- end }}
 
   instanceProfile: "nodes-{{ $name }}-{{ $.Values.clusterName }}"
 

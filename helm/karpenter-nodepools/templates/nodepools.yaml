@@ -24,6 +24,20 @@ spec:
         {{- end }}
         {{- end }}
     spec:
+      # The amount of time a Node can live on the cluster before being removed.
+      # Avoiding long-running Nodes helps to reduce security vulnerabilities as well as to reduce the chance of issues that can plague Nodes with long uptimes such as file fragmentation or memory leaks from system processes.
+      # You can choose to disable expiration entirely by setting the string value 'Never' here.
+      # Note: changing this value in the nodepool will drift the nodeclaims.
+      expireAfter: {{ $value.expireAfter }}
+      {{- if $value.customNodeTaints }}
+      # Provisioned nodes will have these taints.
+      taints:
+      {{- range $value.customNodeTaints }}
+        - key: {{ .key }}
+          effect: {{ .effect }}
+          value: {{ .value | quote }}
+      {{- end }}
+      {{- end }}
       # Provisioned nodes will have these taints, but pods do not need to tolerate these taints to be provisioned by this
       # NodePool. These taints are expected to be temporary and some other entity (e.g. a DaemonSet) is responsible for
       # removing the taint after it has finished initializing the node.

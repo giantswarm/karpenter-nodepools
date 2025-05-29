@@ -1,0 +1,34 @@
+clusterName: test
+nodePools:
+  def00:
+    additionalSecurityGroups:
+      - id: sg-12345678
+    expireAfter: 720h
+    limits:
+    cpu: "1000"
+    memory: "1000Gi"
+
+    rootVolumeSizeGB: 8
+    libVolumeSizeGB: 120
+    logVolumeSizeGB: 30
+
+    requirements:
+      - key: kubernetes.io/arch
+        operator: In
+        values:
+          - amd64
+      - key: karpenter.sh/capacity-type
+        operator: In
+        values:
+          - spot
+          - on-demand
+    subnetTags:
+      - mycustomtag: "sup"
+    customNodeLabels:
+      - some=custom-label
+    customNodeTaints:
+      - key: some
+        effect: NoSchedule
+        value: "true"
+
+vpcMode: public
