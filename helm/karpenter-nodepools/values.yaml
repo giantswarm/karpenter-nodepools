@@ -1,12 +1,15 @@
 clusterName: test
 clusterRegion: eu-west-2
+instanceMetadataHttpTokens: required
 amiOwner: 706635527432
 baseOS: 3975.2.1
 k8sVersion: 1.25.16
 toolingVersion: 1.20.0
+vpcMode: public
 
 nodePools:
   def00:
+    expireAfter: 720h
     limits:
       cpu: "1000"
       memory: "1000Gi"

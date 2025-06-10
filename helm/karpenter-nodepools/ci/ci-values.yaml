@@ -5,8 +5,8 @@ nodePools:
       - id: sg-12345678
     expireAfter: 720h
     limits:
-    cpu: "1000"
-    memory: "1000Gi"
+      cpu: "1000"
+      memory: "1000Gi"
 
     rootVolumeSizeGB: 8
     libVolumeSizeGB: 120
