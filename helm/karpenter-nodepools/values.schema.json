@@ -126,12 +126,12 @@
                                 "cpu": {
                                     "type": "string",
                                     "default": "1000",
-                                    "description": "CPU limits are described with a DecimalSI value"
+                                    "description": "CPU limits are described with a DecimalSI value. For more info about the units go to https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes"
                                 },
                                 "memory": {
                                     "type": "string",
                                     "default": "1000Gi",
-                                    "description": "Memory limits are described with a BinarySI value, such as 1000Gi."
+                                    "description": "Memory limits are described with a BinarySI value, such as 1000Gi. For more info about the units go to https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes"
                                 }
                             }
                         },
