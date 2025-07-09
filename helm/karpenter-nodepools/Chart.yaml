@@ -4,6 +4,6 @@ name: karpenter-nodepools
 description: Karpernter nodepools Helm chart for Giant Swarm Platform
 home: https://github.com/giantswarm/karpenter-nodepools
 icon: https://s.giantswarm.io/app-icons/karpenter/1/light.svg
-version: 0.1.0
+version: 0.2.0
 annotations:
   application.giantswarm.io/team: phoenix
