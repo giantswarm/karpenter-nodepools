@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Add missing document seperator in ec2nodeclass and nodepools templates.
+
 ## [0.2.0] - 2025-07-09
 
 ### Changed
